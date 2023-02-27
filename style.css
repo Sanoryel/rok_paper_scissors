@@ -1,0 +1,68 @@
+*{
+    margin: 0;
+}
+
+#container{
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    margin: 10px;
+}
+
+
+.buttons{
+    justify-content: space-around;
+    display: flex;
+    flex-direction: row;
+    padding: 10px;
+}
+
+button{
+    width: 100px;
+    height: 40px;
+    font-size: large;
+}
+
+#scores{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.score{
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 20px;
+    padding: 5px;
+}
+
+#computerScore{
+    background-color: grey;
+    color: white;
+
+}
+
+#playerScore{
+    background-color: blue;
+    color: white;
+}
+
+.text{
+    display: flex;
+    justify-content: center;
+}
+
+h1{
+    background-color: blue;
+    color: white;
+    padding: 10px;
+}
+#tryAgain{
+    display: none;
+}
+.action{
+    display: flex;
+    flex-direction: column;
+}

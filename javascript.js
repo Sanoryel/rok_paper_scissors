@@ -49,30 +49,76 @@ function playRound(playerSelection, computerSelection) {
     }
 }
 
-function game(){
-    let scorePlayer = 0;
-    let scoreComputer = 0;
-    let playerChoice;
-    let computerChoice;
-    let roundResult;
-    for(let i = 0; i < 5; i++){
-        playerChoice = prompt("Your choice ? (Rock/Paper/Scissors)");
-        computerChoice = getComputerChoice();
-        roundResult = playRound(playerChoice, computerChoice);
-        if(roundResult.charAt(4) == "W"){
-            scorePlayer ++;
-        }else if (roundResult.charAt(4) == "L"){
-            scoreComputer ++;
-        }
-        console.log("[Round " + String(i+1) + "] :" + roundResult);
-    }
-    if(scorePlayer > scoreComputer){
-        console.log("You Win!")
-    }else if (scoreComputer > scorePlayer){
-        console.log("You Lose!")
-    }else{
-        console.log("It's a draw!")
-    }
-}
+let scorePlayer;
+let scoreComputer;
+let roundNumber;
 
-game();
+let buttonContainer = document.querySelector('#playButtons');
+let buttons = document.querySelectorAll('.action');
+
+let  = buttonContainer.childNodes;
+console.log(buttons);
+
+let result = document.querySelector('h3');
+let playerScore = document.querySelector("#playerScore");
+let computerScore = document.querySelector("#computerScore");
+
+let textToDisappear = document.querySelector("h2");
+let tryAgainButton =  document.querySelector("#tryAgain");
+
+restart();
+
+function restart(){
+    scorePlayer = 0;
+    scoreComputer = 0;
+    roundNumber = 0;
+
+    textToDisappear.style.display = "flex";
+    buttonContainer.style.display = "flex";
+
+    tryAgainButton.style.display = "none";
+    result.style.display = "none";
+    result.style.fontSize = "20px";
+
+    playerScore.textContent = `Player: 0`
+    computerScore.textContent = `Computer: 0`
+}
+tryAgainButton.addEventListener("click", restart);
+
+
+function buttonClick(button){ 
+    let res = playRound(button.children[1].textContent, getComputerChoice());
+        result.textContent = res;
+        result.style.display = "flex"
+
+        if (res.charAt(4) == "W") {
+            scorePlayer++;
+            result.style.color = "green";
+        } else if (res.charAt(4) == "L") {
+            scoreComputer++;
+            result.style.color = "red";
+        }else{
+            result.style.color = "black";
+        }
+        playerScore.textContent = `Player: ${scorePlayer}`
+        computerScore.textContent = `Computer: ${scoreComputer}`
+    
+        if(scorePlayer >=5 || scoreComputer >=5){
+            textToDisappear.style.display = "none";
+            buttonContainer.style.display = "none";
+            tryAgainButton.style.display = "block"
+            if (scorePlayer >= 5) {
+                result.textContent = "You Win!";
+                result.style.color = "green";
+                result.style.fontSize = "50px";
+                
+            } else if (scoreComputer >= 5) {
+                result.textContent = "You Lose!";
+                result.style.color = "red";
+                result.style.fontSize = "50px";
+            }
+        }
+        roundNumber++;
+}
+buttons.forEach(button=>button.addEventListener("click", function(){buttonClick(button) }));
+
